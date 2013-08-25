@@ -1,0 +1,77 @@
+<html>
+
+<head>
+	<style type="text/css">
+ 		body {background-color:#000555; color:#aaaaaa;}
+		p {margin-left:30px; margin-top:0px; margin-right:30px; margin-bottom:10px;}
+		h1 {color:#ffffff; font-size:150%; text-align:center;}
+		h2 {color:#ffffff; font-size:130%; margin-left:30px;  margin-bottom:0px; font-weight:bold;}
+		ul {margin-left:30px; margin-right:30px;}
+		.sub {color:#ffffff; font-size:122%; margin-left:30px;  margin-bottom:0px; margin-top:0px; font-weight:bold;}
+		.boldSection {color:#ffffff; font-size:100%; margin-left:30px;  margin-bottom:0px; margin-top:0px; font-weight:bold;}
+	</style>
+</head>
+<body>
+<h1>Physics Help</h1>
+<h2>Projectile Motion Background</h2>
+<p>
+Projectile motion involves the movement of an object, called a projectile, after it has been launched or thrown into the air. 
+Between launch and landing the only forces acting on the object are gravity and air resistance. However, for this game you can entirely ignore air resistance.
+One very important property of projectiles is that their horizontal movement (v<sub>x</sub>, parallel to the ground) is entirely independent of their vertical motion (v<sub>y</sub>, perpendicular to the ground).
+This concept forms the basis for many of the calculations. Because gravity only acts in the vertical direction and due to Newton's 2nd law, the projectile's horizontal speed remains constant throughout its flight if there's no air resistance.
+However, the vertical motion of the ball can be modeled using constant linear acceleration. This concept is illustrated below.
+</p>
+<center><img src="parabola.png" align="center"></center>
+<p>As you can see, the acceleration due to gravity and the horizontal component of the velocity are always constant, while the vertical component of velocity and the overall velocity change. </p>
+
+<h2>Units/Constants</h2>
+<p>
+All distances are measured in meters (m). Speeds are measured in meters per second (m/s). Bearing is measured in degrees east of north (clockwise). Launch Angle is measured in degrees counterclockwise from the ground. The acceleration of gravity is assumed to be 9.81 m/s<sup>2</sup>.
+</p>
+<h2>Calculations</h2>
+<p>
+Projectile Battle takes place in 3 dimensions; The projectile has an x velocity where right is positive, a y velocity where up is positive and a z velocity where out of the screen is positive.
+The representation is actually pseudo 3d, with the z dimension being represented instead by the size of the projectile (it gets bigger as it goes higher up and closer to you).
+This means that for the calculations the projectile's vertical velocity is in the z direction and horizontal velocity is not necessarily in the x direction as you can assume in 2d, but it is in the x-y plane and so has components in both the x and y directions. This is illustrated in the picture below.
+</p>
+<center><img src="bearing.png" align="center"></center>
+<p></p>
+<p>
+<font class="sub">Bearing</font> <br> Bearing is necessary for both easy and hard calculations. In order to calculate bearing, you must first calculate degrees counter clockwise from the x-axis. Use the inverse tangent (tan<sup>-1</sup>) or arc tangent (arctan), (the two mean the same thing) of &Delta;y/&Delta;x. &Delta;x represents target x minus launch x, and &Delta;y represents target y minus launch y.
+</p>
+<center><img src="bearing_formula.png" align="center"></center>
+<p>
+The angle result that you get should be represented as degrees counter clockwise from the x-axis. The arctan will only give angles in the range of -90 to 90 degrees, so it's your job to figure out what the angle should actually be if it lies in the second or third quadrant. 
+Another option you have is to use a calculator that has the atan2(&Delta;y,&Delta;x) function, which will do this quadrant determining work for you and give you the angle counter clockwise from the x-axis. On a TI-84 calculator you can use the function<br> R&#9654;P&#x03b8;(&Delta;x,&Delta;y). To get to R&#9654;P&#x03b8;, press [2ND][ANGLE][6]. Notice that atan2 has &Delta;y before &Delta;x and that R&#9654;P&#x03b8; has &Delta;x before &Delta;y.
+</p>
+<p>
+After you have your angle in degrees, you need to convert it to bearing. Unlike the arctan where 0 degrees represents facing to the right along the x axis and positive angles rotate counterclockwise from 0, with bearing 0 degrees represents North and positive angles rotate clockwise from 0.
+You can use the formula below to convert from degrees counter clockwise from the x-axis to bearing. 
+</p>
+<center><img src="bearing_formula2.png" align="center"></center>
+<p>
+<font class="boldSection">Bearing Tips:</font> If it is easier for you, you may use negative bearings (counterclockwise from north). You can also enter any bearing greater than 360. 
+Also, if your target lies along a line that's parallel to an axis, then just use the appropriate angle, there's no need to calculate it. For example, if the direction is due East, then the bearing is 90.
+In fact, if the original angle is 90 or 270 (bearing angle of 0 or 180, North or South), then the arctan formula won't even work due to &Delta;x being 0.
+</p>
+<p>
+<font class="sub">Range</font><br>
+Range is necessary for easy calculations as an input to the game. For harder calculations it's a necessary intermediate calculation. In my opinion, it's also the easiest to calculate. Just use the distance formula:
+</p>
+<center><img src="distance_formula.png" align="center"></center>
+<p>Alternatively, you can also use R&#9654;Pr(&Delta;x,&Delta;y) on TI-84 calculators. To get to it, press [2ND][ANGLE][5].</p>
+<p><font class="sub">Launch Velocity</font><br>
+Launch velocity is only necessary for the harder calculations. Once you have range, you can use the formula below to calculate launch velocity, where v<sub>0</sub> = launch velocity, R = range, g = acceleration due to gravity (9.81 m/s<sup>2</sup>), and &#x03b8;<sub>0</sub> = launch angle. Ask your physics teacher to derive it for you.
+<center><img src="velocity_formula.png" align="center"></center>
+<p>As you can see, this equation requires launch angle to solve for launch velocity. If the angle is stuck, then use that angle, if it's not then you can pick any angle you want! </p>
+<p><font class="boldSection">Tips:</font> If both launch velocity and launch angle are unstuck, then it's usually easier to just use this equation (as opposed to the launch angle equation) with 45 degrees as the initial launch angle. The sin of 90 is 1, and so 45 degrees simplifies the equation a bit. </p>
+<p><font class="sub">Launch Angle</font><br>
+Launch angle is only necessary for the harder calculations. This formula is the same as the formula provided for the above section, just solved for &#x03b8;<sub>0</sub>.</p>
+<center><img src="angle_formula.png" align="center"></center>
+<p>Remember that arcsin is the same thing as sin<sup>-1</sup>. If the formula gives you an error, then you entered the formula incorrectly or the expression inside of the arcsin is outside the range of the arcsin function of -1 to 1. This means that with the provided velocity, there is no possible angle that can be used to have the projectile reach the target.
+(Think about it, if a projectile's launch velocity was 1 m/s could any angle make it reach a target 10 km away?) This is actually quite rare, and only happens if you want to aim at something really far away and your velocity is stuck at something relatively low. If this happens to you, sorry, you just have to aim for something closer.</p>
+<p><font class="boldSection">Tips:</font> I recommend only using this equation when launch velocity is stuck, because it can be slightly more restrictive (if Rg is outside of the range -1 to 1), and because it is just harder to enter into the calculator in my opinion.</p>
+<h2>Is this game realistic?</h2>
+<p>No. It neglects the effects air resistance, wind, and has perfectly rectangular boats with perfectly circular and consistent explosions. It's a turn based java game, so what did you expect? However, the distances and speeds are roughly proportional. i.e, if you have a fast computer then the projectile will accelerate downward at approximately the same rate as gravity, and it will move along the screen at speeds proportional to the grid scale.</p>
+</body>
+</html>
